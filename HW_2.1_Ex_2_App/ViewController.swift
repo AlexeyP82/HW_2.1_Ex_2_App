@@ -17,32 +17,40 @@ class ViewController: UIViewController {
   
   override func viewDidLoad() {
     super.viewDidLoad()
+    let lightOff: CGFloat = 0.3
     
-    redView.layer.cornerRadius = 50
-    redView.alpha = 0.3
-    
-    yellowView.layer.cornerRadius = 50
-    yellowView.alpha = 0.3
-    
-    greenView.layer.cornerRadius = 50
-    greenView.alpha = 0.3
+    redView.alpha = lightOff
+    yellowView.alpha = lightOff
+    greenView.alpha = lightOff
     
     startButton.layer.cornerRadius = 10
   }
+  
+  override func viewWillLayoutSubviews() {
+    super.viewWillLayoutSubviews()
+    
+    redView.layer.cornerRadius = redView.frame.width / 2
+    yellowView.layer.cornerRadius = yellowView.frame.width / 2
+    greenView.layer.cornerRadius = greenView.frame.height / 2
+  }
 
   @IBAction func startButtonPressed() {
-    if redView.alpha == 1 {
-      redView.alpha = 0.3
-      yellowView.alpha = 1
-    } else if yellowView.alpha == 1 {
-      yellowView.alpha = 0.3
-      greenView.alpha = 1
-    } else if greenView.alpha == 1 {
-      greenView.alpha = 0.3
-      redView.alpha = 1
+    let lightOn: CGFloat = 1.0
+    let lightOff: CGFloat = 0.3
+    
+    startButton.setTitle("Next", for: .normal)
+    
+    if redView.alpha == lightOn {
+      redView.alpha = lightOff
+      yellowView.alpha = lightOn
+    } else if yellowView.alpha == lightOn {
+      yellowView.alpha = lightOff
+      greenView.alpha = lightOn
+    } else if greenView.alpha == lightOn {
+      greenView.alpha = lightOff
+      redView.alpha = lightOn
     } else {
-      redView.alpha = 1
-      startButton.setTitle("Next", for: .normal)
+      redView.alpha = lightOn
     }
   }
 }
